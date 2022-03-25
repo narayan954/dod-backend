@@ -11,6 +11,7 @@ process.on('uncaughtException', (err) => {
 const connectDB = require('./utils/connectDb');
 
 const userRouter = require('./routes/userRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 
 // app routes
 app.use('/api/user', userRouter);
+app.use('/api/bookings', bookingRouter);
 
 // catch non existing routes
 app.all('*', (req, res, next) => {
