@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 
 process.on('uncaughtException', (err) => {
   console.log(err.name, err.message);
@@ -22,6 +23,7 @@ connectDB();
 
 // global middlewares
 app.use(express.json());
+app.use(cors({ origin: 'https://boiling-depths-77572.herokuapp.com/' }));
 
 app.get('/', (req, res) => {
   res.send('HELLO WORLD');
