@@ -94,6 +94,7 @@ module.exports = (err, req, res, next) => {
 
     sendErrorProd(error, req, res);
   } else {
+    // console.log(err);
     res.status(500).json({
       status: 'fail',
       message: 'Something Went Wrong',

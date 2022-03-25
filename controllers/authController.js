@@ -6,7 +6,7 @@ const createToken = require('../utils/createToken');
 const register = catchAsync(async (req, res, next) => {
   const { name, email, password, avatar, userType, tags } = req.body;
   const doctorTags = [];
-  if (!name || !email || !password || !avatar || !type) {
+  if (!name || !email || !password || !avatar || !userType) {
     return next(new AppError('All fields are required', 400));
   }
 
