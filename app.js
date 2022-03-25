@@ -23,11 +23,7 @@ connectDB();
 
 // global middlewares
 app.use(express.json());
-app.use(
-  cors({
-    origin: ['https://doctor-on-demand.vercel.app/', 'http://localhost:3000'],
-  })
-);
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('HELLO WORLD');
