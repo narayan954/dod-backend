@@ -17,7 +17,7 @@ const appointmentSchema = new mongoose.Schema(
       type: Date,
       required: [true, 'Appointment Date is required!'],
     },
-    timeSlots: {
+    timeSlot: {
       type: String,
       required: [true, 'Appointment timeslot is required!'],
     },
