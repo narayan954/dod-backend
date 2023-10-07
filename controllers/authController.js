@@ -1,24 +1,24 @@
-const User = require('../models/userModel');
-const AppError = require('../utils/appError');
-const catchAsync = require('../utils/catchAsync');
-const createToken = require('../utils/createToken');
+const User = require("../models/userModel");
+const AppError = require("../utils/appError");
+const catchAsync = require("../utils/catchAsync");
+const createToken = require("../utils/createToken");
 
 const register = catchAsync(async (req, res, next) => {
   const { name, email, password, avatar, userType, tags } = req.body;
   const doctorTags = [];
   if (!name || !email || !password || !avatar || !userType) {
-    return next(new AppError('All fields are required', 400));
+    return next(new AppError("All fields are required", 400));
   }
 
-  if (userType === 'doctor') {
+  if (userType === "doctor") {
     if (!tags.length) {
-      return next(new AppError('Doctor types are required', 400));
+      return next(new AppError("Doctor types are required", 400));
     }
     doctorTags.push(...tags);
   }
 
-  if (userType === 'admin') {
-    return next(new AppError('Invalid Request', 400));
+  if (userType === "admin") {
+    return next(new AppError("Invalid Request", 400));
   }
 
   const user = await User.create({
@@ -31,7 +31,7 @@ const register = catchAsync(async (req, res, next) => {
   });
 
   res.status(201).json({
-    status: 'success',
+    status: "success",
     user,
     token: createToken(user._id, userType),
   });
@@ -40,22 +40,22 @@ const register = catchAsync(async (req, res, next) => {
 const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return next(new AppError('Email and password are required', 400));
+    return next(new AppError("Email and password are required", 400));
   }
 
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
-    return next(new AppError('Invalid Credentials', 401));
+    return next(new AppError("Invalid Credentials", 401));
   }
 
   if (!(await user.checkPassword(password, user.password))) {
     // user.failLoginCount.push()
-    return next(new AppError('Invalid Credentials', 401));
+    return next(new AppError("Invalid Credentials", 401));
   }
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     user,
     token: createToken(user._id, user.userType),
   });
