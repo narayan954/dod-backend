@@ -1,17 +1,17 @@
-const express = require("express");
-const { register, login } = require("../controllers/authController");
+const express = require('express')
+const { register, login } = require('../controllers/authController')
 const {
   findAllDoctors,
   findDoctorWithType,
-  findOneDoctor,
-} = require("../controllers/userController");
+  findOneDoctor
+} = require('../controllers/userController')
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/register", register);
-router.post("/login", login);
-router.get("/doctors", findAllDoctors);
-router.get("/doctors/type", findDoctorWithType);
-router.get("/doctors/:id", findOneDoctor);
+router.post('/register', register)
+router.post('/login', login)
+router.get('/doctors', findAllDoctors)
+router.get('/doctors/type', findDoctorWithType)
+router.get('/doctors/:id', findOneDoctor)
 
-module.exports = router;
+module.exports = router
